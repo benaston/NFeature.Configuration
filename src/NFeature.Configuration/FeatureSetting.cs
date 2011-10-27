@@ -15,7 +15,7 @@
         private TFeatureEnum[] _dependencies;
         private DateTime _endDtg;
         private FeatureState _featureState;
-        private IDictionary<string, string> _settings;
+        private IDictionary<string, object> _settings;
         private DateTime _startDtg;
         private TTenantEnum[] _supportedTenants;
 
@@ -75,9 +75,9 @@
             }
         }
 
-        public IDictionary<string, string> Settings
+        public IDictionary<string, dynamic> Settings
         {
-            get { return _settings ?? new Dictionary<string, string>(); }
+            get { return _settings ?? new Dictionary<string, object>(); }
             set { _settings = value; }
         }
 

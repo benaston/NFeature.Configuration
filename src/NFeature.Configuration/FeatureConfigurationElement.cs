@@ -117,9 +117,9 @@
 
         [TypeConverter(typeof (JsonToStringDictionaryConverter))]
         [ConfigurationProperty("settings", IsRequired = false)]
-        public Dictionary<string, string> Settings
+        public Dictionary<string, dynamic> Settings
         {
-            get { return (Dictionary<string, string>) this["settings"] ?? new Dictionary<string, string>(); }
+            get { return (Dictionary<string, object>) this["settings"] ?? new Dictionary<string, object>(); }
         }
     }
 }

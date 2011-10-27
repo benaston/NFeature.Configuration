@@ -11,7 +11,7 @@
     {
         public override object ConvertFrom(ITypeDescriptorContext ctx, CultureInfo ci, object data)
         {
-            return JsonConvert.DeserializeObject<Dictionary<string, string>>((string) data);
+            return JsonConvert.DeserializeObject<Dictionary<string, object>>((string) data);
         }
 
         public override object ConvertTo(ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
