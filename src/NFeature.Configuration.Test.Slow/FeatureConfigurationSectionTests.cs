@@ -17,6 +17,7 @@ namespace NFeature.Configuration.Test.Slow
         {
             var s = ConfigurationManager<FeatureConfigurationSection<Feature, Tenant>>.Section();
             var f = s.FeatureSettings;
+
             Assert.That(f[0].Dependencies.Length == 2);
         }
 
@@ -25,6 +26,7 @@ namespace NFeature.Configuration.Test.Slow
         {
             var s = ConfigurationManager<FeatureConfigurationSection<Feature, Tenant>>.Section();
             var f = s.FeatureSettings;
+
             Assert.That(f[3].EndDtg == testEndDtg);
         }
 
@@ -33,6 +35,7 @@ namespace NFeature.Configuration.Test.Slow
         {
             var s = ConfigurationManager < FeatureConfigurationSection<Feature, Tenant>>.Section();
             var f = s.FeatureSettings;
+
             Assert.That(f[2].EndDtg == DateTime.MinValue);
         }
 
@@ -41,6 +44,7 @@ namespace NFeature.Configuration.Test.Slow
         {
             var s = ConfigurationManager<FeatureConfigurationSection<Feature, Tenant>>.Section();
             var f = s.FeatureSettings;
+
             Assert.That(f[0].SupportedTenants.Length == 1);
         }
 
@@ -49,6 +53,7 @@ namespace NFeature.Configuration.Test.Slow
         {
             var s = ConfigurationManager<FeatureConfigurationSection<Feature, Tenant>>.Section();
             var f = s.FeatureSettings;
+
             Assert.That(f[2].StartDtg == testStartDtg);
         }
 
@@ -57,6 +62,7 @@ namespace NFeature.Configuration.Test.Slow
         {
             var s = ConfigurationManager<FeatureConfigurationSection<Feature, Tenant>>.Section();
             var f = s.FeatureSettings;
+
             Assert.That(f[0].SupportedTenants[0] == Tenant.TenantA);
         }
 
@@ -65,6 +71,7 @@ namespace NFeature.Configuration.Test.Slow
         {
             var s = ConfigurationManager<FeatureConfigurationSection<Feature, Tenant>>.Section();
             var f = s.FeatureSettings;
+
             Assert.That(f[0].State == FeatureState.Enabled);
         }
 
@@ -73,6 +80,7 @@ namespace NFeature.Configuration.Test.Slow
         {
             var s = ConfigurationManager<FeatureConfigurationSection<Feature, Tenant>>.Section();
             var f = s.FeatureSettings;
+
             Assert.That(f[1].Settings.Count == 2);
             Assert.That((string)f[1].Settings["testFeatureSetting1"] == "testFeatureSetting1Value");
             Assert.That((string)f[1].Settings["testFeatureSetting2"] == "testFeatureSetting2Value");
@@ -92,6 +100,7 @@ namespace NFeature.Configuration.Test.Slow
         {
             var s = ConfigurationManager<FeatureConfigurationSection<Feature, Tenant>>.Section();
             var f = s.FeatureSettings;
+            
             Assert.That(f[0].Name == "TestFeatureA");
         }
 
@@ -100,6 +109,7 @@ namespace NFeature.Configuration.Test.Slow
         {
             var s = ConfigurationManager<FeatureConfigurationSection<Feature, Tenant>>.Section();
             var f = s.FeatureSettings;
+            
             Assert.That(f[0].Settings.Count, Is.GreaterThan(0));
             Assert.That(f[0].Settings.First().Key == "testFeatureSetting1");
             Assert.That((string)f[0].Settings.First().Value == "testFeatureSetting1Value");
@@ -110,10 +120,10 @@ namespace NFeature.Configuration.Test.Slow
         {
             var s = ConfigurationManager<FeatureConfigurationSection<Feature, Tenant>>.Section();
             var f = s.FeatureSettings;
+            
             Assert.That(f[4].Settings.Count, Is.GreaterThan(0));
             Assert.That((f[4].Settings["My.Type2, MyAssembly"])[0].Value == "one"); //hell yeah
         }
     }
 }
-
 // ReSharper restore InconsistentNaming
