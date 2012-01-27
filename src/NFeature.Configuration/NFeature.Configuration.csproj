@@ -31,16 +31,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="NHelpfulException, Version=1.0.4322.41274, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=4.0.7.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NHelpfulException.1.0.4322.41274\lib\net40\NHelpfulException.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.4.0.7\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NSure, Version=1.0.4322.41374, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="NHelpfulException, Version=1.0.4409.2007, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NSure.1.0.4322.41374\lib\net40\NSure.dll</HintPath>
+      <HintPath>..\packages\NHelpfulException.1.0.4409.2007\lib\net40\NHelpfulException.dll</HintPath>
+    </Reference>
+    <Reference Include="NSure, Version=1.0.4409.2144, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NSure.1.0.4409.2144\lib\net40\NSure.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
