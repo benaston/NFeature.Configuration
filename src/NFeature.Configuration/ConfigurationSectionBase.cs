@@ -1,4 +1,4 @@
-﻿// Copyright 2011, Ben Aston (ben@bj.ma).
+﻿// Copyright 2012, Ben Aston (ben@bj.ma).
 // 
 // This file is part of NFeature.
 // 
@@ -23,8 +23,7 @@ namespace NFeature.Configuration
 	{
 		public abstract string SectionName { get; }
 
-		public virtual ConfigurationSectionBase OnMissingConfiguration()
-		{
+		public virtual ConfigurationSectionBase OnMissingConfiguration() {
 			return null;
 		}
 	}

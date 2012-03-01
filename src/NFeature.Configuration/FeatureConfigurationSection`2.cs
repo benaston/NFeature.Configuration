@@ -1,4 +1,4 @@
-﻿// Copyright 2011, Ben Aston (ben@bj.ma).
+﻿// Copyright 2012, Ben Aston (ben@bj.ma).
 // 
 // This file is part of NFeature.
 // 
@@ -29,19 +29,22 @@ namespace NFeature.Configuration
 	{
 		private static readonly ConfigurationProperty ConfigurationProperties =
 			new ConfigurationProperty(null,
-			                          typeof (FeatureConfigurationElementCollection<TFeatureEnum, TTenantEnum>),
+			                          typeof (
+			                          	FeatureConfigurationElementCollection<TFeatureEnum, TTenantEnum>),
 			                          null,
 			                          ConfigurationPropertyOptions.IsDefaultCollection);
 
 		[TypeConverter(typeof (CommaDelimitedStringCollectionConverter))]
 		[ConfigurationProperty("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-		public FeatureConfigurationElementCollection<TFeatureEnum, TTenantEnum> FeatureSettings
-		{
-			get { return ((FeatureConfigurationElementCollection<TFeatureEnum, TTenantEnum>) base[ConfigurationProperties]); }
+		public FeatureConfigurationElementCollection<TFeatureEnum, TTenantEnum> FeatureSettings {
+			get {
+				return
+					((FeatureConfigurationElementCollection<TFeatureEnum, TTenantEnum>)
+					 base[ConfigurationProperties]);
+			}
 		}
 
-		public override string SectionName
-		{
+		public override string SectionName {
 			get { return "features"; }
 		}
 	}

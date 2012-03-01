@@ -1,4 +1,4 @@
-﻿// Copyright 2011, Ben Aston (ben@bj.ma).
+﻿// Copyright 2012, Ben Aston (ben@bj.ma).
 // 
 // This file is part of NFeature.
 // 
@@ -19,60 +19,50 @@ namespace NFeature.Configuration
 {
 	using System.Configuration;
 
-	public class FeatureConfigurationElementCollection<TFeatureEnum, TTenant> : ConfigurationElementCollection
+	public class FeatureConfigurationElementCollection<TFeatureEnum, TTenant> :
+		ConfigurationElementCollection
 		where TFeatureEnum : struct
 		where TTenant : struct
 	{
-		public override ConfigurationElementCollectionType CollectionType
-		{
+		public override ConfigurationElementCollectionType CollectionType {
 			get { return ConfigurationElementCollectionType.AddRemoveClearMap; }
 		}
 
-		public FeatureConfigurationElement<TFeatureEnum, TTenant> this[int index]
-		{
+		public FeatureConfigurationElement<TFeatureEnum, TTenant> this[int index] {
 			get { return (FeatureConfigurationElement<TFeatureEnum, TTenant>) BaseGet(index); }
-			set
-			{
-				if (BaseGet(index) != null)
-				{
+			set {
+				if (BaseGet(index) != null) {
 					BaseRemoveAt(index);
 				}
 				BaseAdd(index, value);
 			}
 		}
 
-		public void Add(FeatureConfigurationElement<TFeatureEnum, TTenant> element)
-		{
+		public void Add(FeatureConfigurationElement<TFeatureEnum, TTenant> element) {
 			BaseAdd(element);
 		}
 
-		public void Clear()
-		{
+		public void Clear() {
 			BaseClear();
 		}
 
-		protected override ConfigurationElement CreateNewElement()
-		{
+		protected override ConfigurationElement CreateNewElement() {
 			return new FeatureConfigurationElement<TFeatureEnum, TTenant>();
 		}
 
-		protected override object GetElementKey(ConfigurationElement element)
-		{
+		protected override object GetElementKey(ConfigurationElement element) {
 			return ((FeatureConfigurationElement<TFeatureEnum, TTenant>) element).Name;
 		}
 
-		public void Remove(FeatureConfigurationElement<TFeatureEnum, TTenant> element)
-		{
+		public void Remove(FeatureConfigurationElement<TFeatureEnum, TTenant> element) {
 			BaseRemove(element.Name);
 		}
 
-		public void Remove(string name)
-		{
+		public void Remove(string name) {
 			BaseRemove(name);
 		}
 
-		public void RemoveAt(int index)
-		{
+		public void RemoveAt(int index) {
 			BaseRemoveAt(index);
 		}
 	}

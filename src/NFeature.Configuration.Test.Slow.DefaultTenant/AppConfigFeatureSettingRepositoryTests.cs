@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with NFeature.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace NFeature.Configuration.Test.Slow
+namespace NFeature.Configuration.Test.Slow.DefaultTenant
 {
 	using System.Linq;
 	using NUnit.Framework;
@@ -26,7 +26,7 @@ namespace NFeature.Configuration.Test.Slow
 	{
 		[Test]
 		public void GetFeatureSettings_WhenInvokedWithCustomFullName_ReturnsAllCorrectFeatureSetting() {
-			var r = new AppConfigFeatureSettingRepository<Feature, Tenant>();
+			var r = new AppConfigFeatureSettingRepository<Feature>();
 			var settings = r.GetFeatureSettings();
 
 			Assert.That(settings.Count() == 5);
@@ -35,7 +35,7 @@ namespace NFeature.Configuration.Test.Slow
 		[Test]
 		public void
 			GetFeatureSettings_WhenInvoked_FeatureSettingsAreMarkedAsBeingEstablishedCorrectly() {
-			var r = new AppConfigFeatureSettingRepository<Feature, Tenant>();
+			var r = new AppConfigFeatureSettingRepository<Feature>();
 			var settings = r.GetFeatureSettings();
 
 			Assert.That(
@@ -46,31 +46,31 @@ namespace NFeature.Configuration.Test.Slow
 		[Test]
 		public void
 			GetFeatureSettings_WhenInvoked_FeatureSettingsWithNoSpecifiedTenantAreAvailableToAllTenant() {
-			var r = new AppConfigFeatureSettingRepository<Feature, Tenant>();
+			var r = new AppConfigFeatureSettingRepository<Feature>();
 			var settings = r.GetFeatureSettings();
 
 			Assert.That(
 				settings.Where(i => i.Feature == Feature.TestFeatureD).First().SupportedTenants.Contains(
-					Tenant.All));
+					DefaultTenantEnum.All));
 		}
 
 		[Test]
 		public void
 			GetFeatureSettings_WhenInvoked_FeatureSettingsWithSpecifiedTenantsAreAvailableToThoseTenantsOnly
 			() {
-			var r = new AppConfigFeatureSettingRepository<Feature, Tenant>();
+			var r = new AppConfigFeatureSettingRepository<Feature>();
 			var settings = r.GetFeatureSettings();
 
 			Assert.That(
 				settings.Where(i => i.Feature == Feature.TestFeatureA).First().SupportedTenants.Length == 1);
 			Assert.That(
 				settings.Where(i => i.Feature == Feature.TestFeatureA).First().SupportedTenants.Contains(
-					Tenant.TenantA));
+					DefaultTenantEnum.All));
 		}
 
 		[Test]
 		public void GetFeatureSettings_WhenInvoked_ReturnsAllCorrectNumberOfFeatureSettings() {
-			var r = new AppConfigFeatureSettingRepository<Feature, Tenant>();
+			var r = new AppConfigFeatureSettingRepository<Feature>();
 			var settings = r.GetFeatureSettings();
 
 			Assert.That(settings.Count() == 5);

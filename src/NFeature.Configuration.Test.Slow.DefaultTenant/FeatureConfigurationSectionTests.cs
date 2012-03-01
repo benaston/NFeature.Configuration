@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with NFeature.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace NFeature.Configuration.Test.Slow
+namespace NFeature.Configuration.Test.Slow.DefaultTenant
 {
 	using System;
 	using System.Linq;
@@ -30,7 +30,7 @@ namespace NFeature.Configuration.Test.Slow
 
 		[Test]
 		public void FeatureConfigurationSection_Retrieves_ArrayJsonSetting_OK() {
-			var s = ConfigurationManager<FeatureConfigurationSection<Feature, Tenant>>.Section();
+			var s = ConfigurationManager<FeatureConfigurationSection<Feature>>.Section();
 			var f = s.FeatureSettings;
 
 			Assert.That(f[4].Settings.Count, Is.GreaterThan(0));
@@ -39,7 +39,7 @@ namespace NFeature.Configuration.Test.Slow
 
 		[Test]
 		public void FeatureConfigurationSection_Retrieves_Correct_Dependencies() {
-			var s = ConfigurationManager<FeatureConfigurationSection<Feature, Tenant>>.Section();
+			var s = ConfigurationManager<FeatureConfigurationSection<Feature>>.Section();
 			var f = s.FeatureSettings;
 
 			Assert.That(f[0].Dependencies.Length == 2);
@@ -47,7 +47,7 @@ namespace NFeature.Configuration.Test.Slow
 
 		[Test]
 		public void FeatureConfigurationSection_Retrieves_Correct_EndDtg() {
-			var s = ConfigurationManager<FeatureConfigurationSection<Feature, Tenant>>.Section();
+			var s = ConfigurationManager<FeatureConfigurationSection<Feature>>.Section();
 			var f = s.FeatureSettings;
 
 			Assert.That(f[3].EndDtg == testEndDtg);
@@ -55,7 +55,7 @@ namespace NFeature.Configuration.Test.Slow
 
 		[Test]
 		public void FeatureConfigurationSection_Retrieves_Correct_EndDtg_When_None_Specified() {
-			var s = ConfigurationManager<FeatureConfigurationSection<Feature, Tenant>>.Section();
+			var s = ConfigurationManager<FeatureConfigurationSection<Feature>>.Section();
 			var f = s.FeatureSettings;
 
 			Assert.That(f[2].EndDtg == DateTime.MinValue);
@@ -63,7 +63,7 @@ namespace NFeature.Configuration.Test.Slow
 
 		[Test]
 		public void FeatureConfigurationSection_Retrieves_Correct_Number_Of_SupportedTenants() {
-			var s = ConfigurationManager<FeatureConfigurationSection<Feature, Tenant>>.Section();
+			var s = ConfigurationManager<FeatureConfigurationSection<Feature>>.Section();
 			var f = s.FeatureSettings;
 
 			Assert.That(f[0].SupportedTenants.Length == 1);
@@ -71,7 +71,7 @@ namespace NFeature.Configuration.Test.Slow
 
 		[Test]
 		public void FeatureConfigurationSection_Retrieves_Correct_StartDtg() {
-			var s = ConfigurationManager<FeatureConfigurationSection<Feature, Tenant>>.Section();
+			var s = ConfigurationManager<FeatureConfigurationSection<Feature>>.Section();
 			var f = s.FeatureSettings;
 
 			Assert.That(f[2].StartDtg == testStartDtg);
@@ -79,15 +79,15 @@ namespace NFeature.Configuration.Test.Slow
 
 		[Test]
 		public void FeatureConfigurationSection_Retrieves_Correct_SupportedTenants() {
-			var s = ConfigurationManager<FeatureConfigurationSection<Feature, Tenant>>.Section();
+			var s = ConfigurationManager<FeatureConfigurationSection<Feature>>.Section();
 			var f = s.FeatureSettings;
 
-			Assert.That(f[0].SupportedTenants[0] == Tenant.TenantA);
+			Assert.That(f[0].SupportedTenants[0] == DefaultTenantEnum.All);
 		}
 
 		[Test]
 		public void FeatureConfigurationSection_Retrieves_FeatureState_OK() {
-			var s = ConfigurationManager<FeatureConfigurationSection<Feature, Tenant>>.Section();
+			var s = ConfigurationManager<FeatureConfigurationSection<Feature>>.Section();
 			var f = s.FeatureSettings;
 
 			Assert.That(f[0].State == FeatureState.Enabled);
@@ -95,7 +95,7 @@ namespace NFeature.Configuration.Test.Slow
 
 		[Test]
 		public void FeatureConfigurationSection_Retrieves_MultipleJsonSettings_OK() {
-			var s = ConfigurationManager<FeatureConfigurationSection<Feature, Tenant>>.Section();
+			var s = ConfigurationManager<FeatureConfigurationSection<Feature>>.Section();
 			var f = s.FeatureSettings;
 
 			Assert.That(f[1].Settings.Count == 2);
@@ -105,7 +105,7 @@ namespace NFeature.Configuration.Test.Slow
 
 		[Test]
 		public void FeatureConfigurationSection_Retrieves_Multiple_Features_OK() {
-			var s = ConfigurationManager<FeatureConfigurationSection<Feature, Tenant>>.Section();
+			var s = ConfigurationManager<FeatureConfigurationSection<Feature>>.Section();
 			var f = s.FeatureSettings;
 
 			Assert.That(f.Count == 5);
@@ -113,7 +113,7 @@ namespace NFeature.Configuration.Test.Slow
 
 		[Test]
 		public void FeatureConfigurationSection_Retrieves_Name_OK() {
-			var s = ConfigurationManager<FeatureConfigurationSection<Feature, Tenant>>.Section();
+			var s = ConfigurationManager<FeatureConfigurationSection<Feature>>.Section();
 			var f = s.FeatureSettings;
 
 			Assert.That(f[0].Name == "TestFeatureA");
@@ -121,7 +121,7 @@ namespace NFeature.Configuration.Test.Slow
 
 		[Test]
 		public void FeatureConfigurationSection_Retrieves_SingleJsonSetting_OK() {
-			var s = ConfigurationManager<FeatureConfigurationSection<Feature, Tenant>>.Section();
+			var s = ConfigurationManager<FeatureConfigurationSection<Feature>>.Section();
 			var f = s.FeatureSettings;
 
 			Assert.That(f[0].Settings.Count, Is.GreaterThan(0));

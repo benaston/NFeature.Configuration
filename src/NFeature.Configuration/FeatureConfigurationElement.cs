@@ -1,4 +1,4 @@
-﻿// Copyright 2011, Ben Aston (ben@bj.ma).
+﻿// Copyright 2012, Ben Aston (ben@bj.ma).
 // 
 // This file is part of NFeature.
 // 
@@ -36,15 +36,13 @@ namespace NFeature.Configuration
 		where TTenantEnum : struct
 	{
 		[ConfigurationProperty("name", IsRequired = true)]
-		public string Name
-		{
+		public string Name {
 			get { return (string) this["name"]; }
 			set { this["name"] = value; }
 		}
 
 		[ConfigurationProperty("description", IsRequired = false)]
-		public string Description
-		{
+		public string Description {
 			get { return (string) this["description"]; }
 			set { this["description"] = value; }
 		}
@@ -53,9 +51,10 @@ namespace NFeature.Configuration
 		/// 	NOTE: BA; defaults to Enabled, this enables expected behavior when 'IsRequiredByFeatureSubsystem' features do not have their state explicitly specified (they are always 'Enabled'). NOTE 1: if not defined, zero is supplied.
 		/// </summary>
 		[ConfigurationProperty("state", IsRequired = false)]
-		public FeatureState State
-		{
-			get { return (int) this["state"] == 0 ? FeatureState.Enabled : (FeatureState) this["state"]; //see note 1 
+		public FeatureState State {
+			get {
+				return (int) this["state"] == 0 ? FeatureState.Enabled : (FeatureState) this["state"];
+				//see note 1 
 			}
 			set { this["state"] = Enum.GetName(typeof (FeatureState), value); }
 		}
@@ -65,15 +64,14 @@ namespace NFeature.Configuration
 		/// </summary>
 		[TypeConverter(typeof (CommaDelimitedStringCollectionConverter))]
 		[ConfigurationProperty("supportedTenants", IsRequired = false)]
-		public TTenantEnum[] SupportedTenants
-		{
-			get
-			{
+		public TTenantEnum[] SupportedTenants {
+			get {
 				var tenantNames = ((CommaDelimitedStringCollection) this["supportedTenants"]);
 
-				if (tenantNames != null)
-				{
-					return (tenantNames.Cast<string>().Select(t => (TTenantEnum) Enum.Parse(typeof (TTenantEnum), t))).ToArray();
+				if (tenantNames != null) {
+					return
+						(tenantNames.Cast<string>().Select(t => (TTenantEnum) Enum.Parse(typeof (TTenantEnum), t)))
+							.ToArray();
 				}
 
 				return new[] {(TTenantEnum) Enum.ToObject(typeof (TTenantEnum), 0)}; //see note 1
@@ -83,14 +81,14 @@ namespace NFeature.Configuration
 
 		[TypeConverter(typeof (CommaDelimitedStringCollectionConverter))]
 		[ConfigurationProperty("dependencies", IsRequired = false)]
-		public TFeatureEnum[] Dependencies
-		{
-			get
-			{
+		public TFeatureEnum[] Dependencies {
+			get {
 				var dependencies = ((CommaDelimitedStringCollection) this["dependencies"]) ??
 				                   new CommaDelimitedStringCollection();
 
-				return (dependencies.Cast<string>().Select(t => (TFeatureEnum) Enum.Parse(typeof (TFeatureEnum), t))).ToArray();
+				return
+					(dependencies.Cast<string>().Select(
+						t => (TFeatureEnum) Enum.Parse(typeof (TFeatureEnum), t))).ToArray();
 			}
 			set { this["dependencies"] = value; }
 		}
@@ -100,32 +98,28 @@ namespace NFeature.Configuration
 		/// </summary>
 		[TypeConverter(typeof (BooleanConverter))]
 		[ConfigurationProperty("isRequiredByFeatureSubsystem", IsRequired = false)]
-		public bool IsRequiredByFeatureSubsystem
-		{
+		public bool IsRequiredByFeatureSubsystem {
 			get { return (bool) this["isRequiredByFeatureSubsystem"]; }
 			set { this["isRequiredByFeatureSubsystem"] = value; }
 		}
 
 		[TypeConverter(typeof (StringToEnGBDateTimeConverter))]
 		[ConfigurationProperty("startDtg", IsRequired = false)]
-		public DateTime StartDtg
-		{
+		public DateTime StartDtg {
 			get { return (DateTime) this["startDtg"]; }
 			set { this["startDtg"] = value; }
 		}
 
 		[TypeConverter(typeof (StringToEnGBDateTimeConverter))]
 		[ConfigurationProperty("endDtg", IsRequired = false)]
-		public DateTime EndDtg
-		{
+		public DateTime EndDtg {
 			get { return (DateTime) this["endDtg"]; }
 			set { this["endDtg"] = value; }
 		}
 
 		[TypeConverter(typeof (JsonToStringDictionaryConverter))]
 		[ConfigurationProperty("settings", IsRequired = false)]
-		public Dictionary<string, dynamic> Settings
-		{
+		public Dictionary<string, dynamic> Settings {
 			get { return (Dictionary<string, object>) this["settings"] ?? new Dictionary<string, object>(); }
 		}
 	}

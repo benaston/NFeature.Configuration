@@ -1,4 +1,4 @@
-﻿// Copyright 2011, Ben Aston (ben@bj.ma).
+﻿// Copyright 2012, Ben Aston (ben@bj.ma).
 // 
 // This file is part of NFeature.
 // 
@@ -17,7 +17,8 @@
 
 namespace NFeature.Configuration
 {
-	public interface IFeatureSettingRepository<TFeatureEnum> : IFeatureSettingRepository<TFeatureEnum, DefaultTenantEnum>
+	public interface IFeatureSettingRepository<TFeatureEnum> :
+		IFeatureSettingRepository<TFeatureEnum, DefaultTenantEnum>
 		where TFeatureEnum : struct {}
 
 	/// <summary>

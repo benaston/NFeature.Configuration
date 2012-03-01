@@ -17,11 +17,7 @@
 
 namespace NFeature.Configuration
 {
-	public enum FeatureState
-	{
-		Disabled = 1,
-		Enabled,
-		Previewable,
-		Established,
-	}
+	public class FeatureConfigurationSection<TFeatureEnum> :
+		FeatureConfigurationSection<TFeatureEnum, DefaultTenantEnum>
+		where TFeatureEnum : struct {}
 }

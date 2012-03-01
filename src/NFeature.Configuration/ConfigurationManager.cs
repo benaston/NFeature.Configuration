@@ -1,4 +1,4 @@
-﻿// Copyright 2011, Ben Aston (ben@bj.ma).
+﻿// Copyright 2012, Ben Aston (ben@bj.ma).
 // 
 // This file is part of NFeature.
 // 
@@ -22,21 +22,18 @@ namespace NFeature.Configuration
 
 	public static class ConfigurationManager<T> where T : ConfigurationSectionBase, new()
 	{
-		public static T Section(Func<T> onMissingSection = null)
-		{
+		public static T Section(Func<T> onMissingSection = null) {
 			var config = new T();
 			var section = Section(config.SectionName);
 
-			if (section == null)
-			{
+			if (section == null) {
 				return new T().OnMissingConfiguration() as T;
 			}
 
 			return section;
 		}
 
-		public static T Section(string sectionName)
-		{
+		public static T Section(string sectionName) {
 			return (T) ConfigurationManager.GetSection(sectionName);
 		}
 	}

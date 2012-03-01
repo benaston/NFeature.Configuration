@@ -1,4 +1,4 @@
-﻿// Copyright 2011, Ben Aston (ben@bj.ma).
+﻿// Copyright 2012, Ben Aston (ben@bj.ma).
 // 
 // This file is part of NFeature.
 // 
@@ -26,28 +26,27 @@ namespace NFeature.Configuration
 
 	public sealed class JsonToStringDictionaryConverter : ConfigurationConverterBase
 	{
-		public override object ConvertFrom(ITypeDescriptorContext ctx, CultureInfo ci, object data)
-		{
+		public override object ConvertFrom(ITypeDescriptorContext ctx, CultureInfo ci, object data) {
 			return JsonConvert.DeserializeObject<Dictionary<string, object>>((string) data);
 		}
 
-		public override object ConvertTo(ITypeDescriptorContext ctx, CultureInfo ci, object value, Type type)
-		{
+		public override object ConvertTo(ITypeDescriptorContext ctx,
+		                                 CultureInfo ci,
+		                                 object value,
+		                                 Type type) {
 			ValidateType(value, typeof (Dictionary<string, string>));
 			var dictionary = value as Dictionary<string, string>;
-			if (dictionary != null)
-			{
+			if (dictionary != null) {
 				return JsonConvert.SerializeObject(dictionary);
 			}
 
 			return null;
 		}
 
-		private static void ValidateType(object value, Type expected)
-		{
-			if ((value != null) && (value.GetType() != expected))
-			{
-				throw new ArgumentException(string.Format("Converter unsupported value type {0}", new {expected.Name}));
+		private static void ValidateType(object value, Type expected) {
+			if ((value != null) && (value.GetType() != expected)) {
+				throw new ArgumentException(string.Format("Converter unsupported value type {0}",
+				                                          new {expected.Name}));
 			}
 		}
 	}

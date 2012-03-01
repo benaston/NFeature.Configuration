@@ -1,4 +1,4 @@
-﻿// Copyright 2011, Ben Aston (ben@bj.ma).
+﻿// Copyright 2012, Ben Aston (ben@bj.ma).
 // 
 // This file is part of NFeature.
 // 
@@ -23,10 +23,15 @@ namespace NFeature.Configuration.Exceptions
 	public class FeatureConfigurationException<TFeatureEnum> : HelpfulException
 		where TFeatureEnum : struct
 	{
-		public FeatureConfigurationException(TFeatureEnum feature, string message = "",
-		                                     string[] resolutionSuggestions = null, Exception innerException = null)
+		public FeatureConfigurationException(TFeatureEnum feature,
+		                                     string message = "",
+		                                     string[] resolutionSuggestions = null,
+		                                     Exception innerException = null)
 			: base(
-				string.Format("{0}. Affected feature: \"{1}\".", message,
-				              Enum.GetName(typeof (TFeatureEnum), feature)), resolutionSuggestions, innerException) {}
+				string.Format("{0}. Affected feature: \"{1}\".",
+				              message,
+				              Enum.GetName(typeof (TFeatureEnum), feature)),
+				resolutionSuggestions,
+				innerException) {}
 	}
 }
