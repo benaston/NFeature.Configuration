@@ -35,13 +35,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.4.5.7\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NHelpfulException, Version=1.0.4409.2007, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="NHelpfulException, Version=1.0.4554.34109, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NHelpfulException.1.0.4409.2007\lib\net40\NHelpfulException.dll</HintPath>
+      <HintPath>..\packages\NHelpfulException.1.0.4554.34109\lib\net40\NHelpfulException.dll</HintPath>
     </Reference>
-    <Reference Include="NSure, Version=1.0.4409.2144, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="NSure, Version=1.0.4554.34428, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NSure.1.0.4409.2144\lib\net40\NSure.dll</HintPath>
+      <HintPath>..\packages\NSure.1.0.4554.34428\lib\net40\NSure.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
