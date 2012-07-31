@@ -29,10 +29,10 @@ namespace NFeature.Configuration
 	{
 		private static readonly ConfigurationProperty ConfigurationProperties =
 			new ConfigurationProperty(null,
-			                          typeof (
-			                          	FeatureConfigurationElementCollection<TFeatureEnum, TTenantEnum>),
-			                          null,
-			                          ConfigurationPropertyOptions.IsDefaultCollection);
+									  typeof (
+										FeatureConfigurationElementCollection<TFeatureEnum, TTenantEnum>),
+									  null,
+									  ConfigurationPropertyOptions.IsDefaultCollection);
 
 		[TypeConverter(typeof (CommaDelimitedStringCollectionConverter))]
 		[ConfigurationProperty("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
@@ -42,10 +42,6 @@ namespace NFeature.Configuration
 					((FeatureConfigurationElementCollection<TFeatureEnum, TTenantEnum>)
 					 base[ConfigurationProperties]);
 			}
-		}
-
-		public override string SectionName {
-			get { return "features"; }
 		}
 	}
 }

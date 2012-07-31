@@ -1,4 +1,4 @@
-﻿// Copyright 2012, Ben Aston (ben@bj.ma).
+// Copyright 2012, Ben Aston (ben@bj.ma).
 // 
 // This file is part of NFeature.
 // 
@@ -15,14 +15,10 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with NFeature.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace NFeature.Configuration
+namespace NFeature.Configuration.Test.Slow
 {
-	using System.Configuration;
-
-	public abstract class ConfigurationSectionBase : ConfigurationSection
-	{
-		public virtual ConfigurationSectionBase OnMissingConfiguration() {
-			return null;
-		}
-	}
+    public enum Feature2
+    {
+        TestFeatureZ
+    }
 }

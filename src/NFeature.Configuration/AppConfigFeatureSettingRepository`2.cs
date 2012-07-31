@@ -15,6 +15,9 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with NFeature.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Collections.Generic;
+using System.Configuration;
+
 namespace NFeature.Configuration
 {
 	using System;
@@ -28,11 +31,15 @@ namespace NFeature.Configuration
 		where TFeatureEnum : struct
 		where TTenantEnum : struct
 	{
+
+		public Func<System.Configuration.Configuration> GetConfiguration = () => ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
 		public FeatureSetting<TFeatureEnum, TTenantEnum>[] GetFeatureSettings() {
-			var configElements =
-				ConfigurationManager<FeatureConfigurationSection<TFeatureEnum, TTenantEnum>>.Section().
-					FeatureSettings.Cast
-					<FeatureConfigurationElement<TFeatureEnum, TTenantEnum>>();
+
+			IEnumerable<FeatureConfigurationElement<TFeatureEnum, TTenantEnum>> configElements;
+
+			configElements = LoadConfigElements();
+				
 
 			return
 				configElements.Select(
@@ -48,6 +55,16 @@ namespace NFeature.Configuration
 						StartDtg = fcse.StartDtg,
 						EndDtg = fcse.EndDtg,
 					}).ToArray();
+		}
+
+		protected virtual IEnumerable<FeatureConfigurationElement<TFeatureEnum, TTenantEnum>> LoadConfigElements()
+		{
+			IEnumerable<FeatureConfigurationElement<TFeatureEnum, TTenantEnum>> configElements;
+			var configurationManager = new ConfigurationManager<FeatureConfigurationSection<TFeatureEnum, TTenantEnum>, TFeatureEnum, TTenantEnum> {GetConfiguration = GetConfiguration};
+			configElements = configurationManager.Section().
+				FeatureSettings.Cast
+				<FeatureConfigurationElement<TFeatureEnum, TTenantEnum>>();
+			return configElements;
 		}
 	}
 }
