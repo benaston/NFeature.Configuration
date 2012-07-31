@@ -1,4 +1,4 @@
-﻿// Copyright 2012, Ben Aston (ben@bj.ma).
+// Copyright 2012, Ben Aston (ben@bj.ma).
 // 
 // This file is part of NFeature.
 // 
@@ -15,22 +15,10 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with NFeature.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Linq;
-
-namespace NFeature.Configuration
+namespace NFeature.Configuration.Test.Slow
 {
-	public class AppConfigFeatureSettingRepository<TFeatureEnum> :
-		AppConfigFeatureSettingRepository<TFeatureEnum, DefaultTenantEnum>,
-		IFeatureSettingRepository<TFeatureEnum>
-		where TFeatureEnum : struct
-	{
-		protected override System.Collections.Generic.IEnumerable<FeatureConfigurationElement<TFeatureEnum, DefaultTenantEnum>> LoadConfigElements()
-		{
-			return new ConfigurationManager<FeatureConfigurationSection<TFeatureEnum>, TFeatureEnum>().Section().
-				FeatureSettings.Cast<FeatureConfigurationElement<TFeatureEnum, DefaultTenantEnum>>();
-
-		}
-	}
-
-   
+    public enum Feature2
+    {
+        TestFeatureZ
+    }
 }
