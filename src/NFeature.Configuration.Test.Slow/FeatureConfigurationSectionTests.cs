@@ -94,6 +94,15 @@ namespace NFeature.Configuration.Test.Slow
 		}
 
 		[Test]
+		public void FeatureConfigurationSection_Retrieves_FeatureState_OK_From_Feature2_Section()
+		{
+			var s = ConfigurationManager<FeatureConfigurationSection<Feature2, Tenant>>.Section();
+			var f = s.FeatureSettings;
+
+			Assert.That(f[0].State == FeatureState.Enabled);
+		}
+
+		[Test]
 		public void FeatureConfigurationSection_Retrieves_MultipleJsonSettings_OK() {
 			var s = ConfigurationManager<FeatureConfigurationSection<Feature, Tenant>>.Section();
 			var f = s.FeatureSettings;

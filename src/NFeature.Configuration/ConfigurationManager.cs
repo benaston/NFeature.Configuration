@@ -15,6 +15,8 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with NFeature.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Linq;
+
 namespace NFeature.Configuration
 {
 	using System;
@@ -22,19 +24,18 @@ namespace NFeature.Configuration
 
 	public static class ConfigurationManager<T> where T : ConfigurationSectionBase, new()
 	{
-		public static T Section(Func<T> onMissingSection = null) {
-			var config = new T();
-			var section = Section(config.SectionName);
+		public static T Section(Func<T> onMissingSection = null)
+		{
+			var configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+			// find section that matches type
+			T section = configuration.Sections.Cast<ConfigurationSection>().Where(sec => sec.ElementInformation.Type == typeof(T)).Cast<T>().FirstOrDefault();
 
 			if (section == null) {
 				return new T().OnMissingConfiguration() as T;
 			}
 
 			return section;
-		}
-
-		public static T Section(string sectionName) {
-			return (T) ConfigurationManager.GetSection(sectionName);
 		}
 	}
 }
