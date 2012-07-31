@@ -26,9 +26,10 @@ namespace NFeature.Configuration
 	{
 		protected override System.Collections.Generic.IEnumerable<FeatureConfigurationElement<TFeatureEnum, DefaultTenantEnum>> LoadConfigElements()
 		{
-			return new ConfigurationManager<FeatureConfigurationSection<TFeatureEnum>, TFeatureEnum>().Section().
-				FeatureSettings.Cast<FeatureConfigurationElement<TFeatureEnum, DefaultTenantEnum>>();
+			var configurationManager = new ConfigurationManager<FeatureConfigurationSection<TFeatureEnum>, TFeatureEnum> {GetConfiguration = GetConfiguration};
 
+		    return configurationManager.Section().
+				FeatureSettings.Cast<FeatureConfigurationElement<TFeatureEnum, DefaultTenantEnum>>();
 		}
 	}
 

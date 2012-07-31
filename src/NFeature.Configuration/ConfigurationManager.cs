@@ -35,9 +35,11 @@ namespace NFeature.Configuration
         where TFeatureEnum : struct
         where TTenantEnum : struct
     {
+        public Func<Configuration> GetConfiguration = () => ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
         public T Section(Func<T> onMissingSection = null)
         {
-            var configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var configuration = GetConfiguration();
 
             
             // find section that matches type

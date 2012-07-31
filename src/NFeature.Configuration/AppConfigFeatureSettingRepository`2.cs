@@ -16,6 +16,7 @@
 // along with NFeature.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
+using System.Configuration;
 
 namespace NFeature.Configuration
 {
@@ -30,6 +31,9 @@ namespace NFeature.Configuration
 		where TFeatureEnum : struct
 		where TTenantEnum : struct
 	{
+
+		public Func<System.Configuration.Configuration> GetConfiguration = () => ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
 		public FeatureSetting<TFeatureEnum, TTenantEnum>[] GetFeatureSettings() {
 
 			IEnumerable<FeatureConfigurationElement<TFeatureEnum, TTenantEnum>> configElements;
@@ -56,7 +60,8 @@ namespace NFeature.Configuration
 		protected virtual IEnumerable<FeatureConfigurationElement<TFeatureEnum, TTenantEnum>> LoadConfigElements()
 		{
 			IEnumerable<FeatureConfigurationElement<TFeatureEnum, TTenantEnum>> configElements;
-			configElements = new ConfigurationManager<FeatureConfigurationSection<TFeatureEnum, TTenantEnum>, TFeatureEnum, TTenantEnum>().Section().
+			var configurationManager = new ConfigurationManager<FeatureConfigurationSection<TFeatureEnum, TTenantEnum>, TFeatureEnum, TTenantEnum> {GetConfiguration = GetConfiguration};
+			configElements = configurationManager.Section().
 				FeatureSettings.Cast
 				<FeatureConfigurationElement<TFeatureEnum, TTenantEnum>>();
 			return configElements;
