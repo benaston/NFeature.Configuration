@@ -19,23 +19,56 @@ using System.Linq;
 
 namespace NFeature.Configuration
 {
-	using System;
-	using System.Configuration;
+    using System;
+    using System.Configuration;
 
-	public static class ConfigurationManager<T> where T : ConfigurationSectionBase, new()
-	{
-		public static T Section(Func<T> onMissingSection = null)
-		{
-			var configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+    public class ConfigurationManager<T, TFeatureEnum> : ConfigurationManager<T, TFeatureEnum, DefaultTenantEnum> where T : FeatureConfigurationSection<TFeatureEnum, DefaultTenantEnum>, new() where TFeatureEnum : struct
+    {
+        protected override bool Compare(ConfigurationSection sec)
+        {
+            return sec.ElementInformation.Type == typeof(T);
+        }
+    }
 
-			// find section that matches type
-			T section = configuration.Sections.Cast<ConfigurationSection>().Where(sec => sec.ElementInformation.Type == typeof(T)).Cast<T>().FirstOrDefault();
+    public class ConfigurationManager<T, TFeatureEnum, TTenantEnum> 
+        where T : FeatureConfigurationSection<TFeatureEnum, TTenantEnum>, new()
+        where TFeatureEnum : struct
+        where TTenantEnum : struct
+    {
+        public T Section(Func<T> onMissingSection = null)
+        {
+            var configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
-			if (section == null) {
-				return new T().OnMissingConfiguration() as T;
-			}
+            
+            // find section that matches type
+            string sectionName = null;
+            foreach (ConfigurationSection sec in configuration.Sections)
+            {
+                if (Compare(sec))
+                {
+                    sectionName = sec.SectionInformation.Name;
+                    break;
+                }
+            }
 
-			return section;
-		}
-	}
+            T section = Section(sectionName);
+
+
+            if (section == null) {
+                return new T().OnMissingConfiguration() as T;
+            }
+
+            return section;
+        }
+
+        protected virtual bool Compare(ConfigurationSection sec)
+        {
+            return sec.ElementInformation.Type == typeof(T)  || (sec.ElementInformation.Type.IsGenericType && sec.ElementInformation.Type.GetGenericTypeDefinition() == typeof(FeatureConfigurationSection<>));
+        }
+
+        public T Section(string sectionName)
+        {
+            return (T)ConfigurationManager.GetSection(sectionName);
+        }
+    }
 }

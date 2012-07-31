@@ -30,7 +30,7 @@ namespace NFeature.Configuration
 	{
 		public FeatureSetting<TFeatureEnum, TTenantEnum>[] GetFeatureSettings() {
 			var configElements =
-				ConfigurationManager<FeatureConfigurationSection<TFeatureEnum, TTenantEnum>>.Section().
+				new ConfigurationManager<FeatureConfigurationSection<TFeatureEnum, TTenantEnum>, TFeatureEnum, TTenantEnum>().Section().
 					FeatureSettings.Cast
 					<FeatureConfigurationElement<TFeatureEnum, TTenantEnum>>();
 
