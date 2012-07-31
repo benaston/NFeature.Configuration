@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="AppConfigFeatureSettingRepositoryTests.cs" />
     <Compile Include="Feature.cs" />
+    <Compile Include="Feature2.cs" />
     <Compile Include="FeatureConfigurationSectionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
